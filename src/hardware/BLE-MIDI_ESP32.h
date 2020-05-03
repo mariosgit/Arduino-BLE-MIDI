@@ -24,7 +24,7 @@ public:
     {
     }
     
-	bool begin(const char* deviceName, BLEMIDITransport<class BLEMIDI_ESP32>*);
+	inline bool begin(const char* deviceName, BLEMIDITransport<class BLEMIDI_ESP32>*);
     
     void write(uint8_t* buffer, size_t length)
     {
