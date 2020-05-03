@@ -6,6 +6,8 @@
 #include <BLEServer.h>
 #include <BLE2902.h>
 
+// #include <mbLog.h>
+
 BEGIN_BLEMIDI_NAMESPACE
 
 class BLEMIDI_ESP32
@@ -22,7 +24,7 @@ public:
     {
     }
     
-	bool begin(const char*, BLEMIDITransport<class BLEMIDI_ESP32>*);
+	bool begin(const char* deviceName, BLEMIDITransport<class BLEMIDI_ESP32>*);
     
     void write(uint8_t* buffer, size_t length)
     {
@@ -184,6 +186,32 @@ protected:
         if (rxValue.length() > 0) {
 			_bluetoothEsp32->receive((uint8_t *)(rxValue.c_str()), rxValue.length());
         }
+    }
+    void onStatus(BLECharacteristic* pCharacteristic, Status s, uint32_t code) {
+        // LOG <<"BLECharacteristicCallbacks onStatus code:" <<code ;
+
+        // switch(s)
+        // {
+        //     case BLECharacteristicCallbacks::Status::ERROR_NOTIFY_DISABLED:
+        //         LOG <<" - ERROR_NOTIFY_DISABLED" <<LOG.endl; break;
+        //     case BLECharacteristicCallbacks::Status::ERROR_NO_CLIENT:
+        //         LOG <<" - ERROR_NO_CLIENT" <<LOG.endl; break;
+
+        //     case BLECharacteristicCallbacks::Status::SUCCESS_INDICATE:
+        //         LOG <<" - SUCCESS_INDICATE" <<LOG.endl; break;
+        //     case BLECharacteristicCallbacks::Status::ERROR_INDICATE_FAILURE:
+        //         LOG <<" - ERROR_INDICATE_FAILURE" <<LOG.endl; break;
+        //     case BLECharacteristicCallbacks::Status::SUCCESS_NOTIFY:
+        //         LOG <<" - SUCCESS_NOTIFY" <<LOG.endl; break;
+        //     case BLECharacteristicCallbacks::Status::ERROR_INDICATE_TIMEOUT:
+        //         LOG <<" - ERROR_INDICATE_TIMEOUT" <<LOG.endl; break;
+        //     case BLECharacteristicCallbacks::Status::ERROR_GATT:
+        //         LOG <<" - ERROR_GATT" <<LOG.endl; break;
+        //     case BLECharacteristicCallbacks::Status::ERROR_INDICATE_DISABLED:
+        //         LOG <<" - ERROR_INDICATE_DISABLED" <<LOG.endl; break;
+        //     default:
+        //         LOG <<" - whatever " <<(int)s <<LOG.endl; 
+        // }
     }
 };
 

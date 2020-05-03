@@ -61,9 +61,12 @@ public:
     
     void write(byte inData)
     {
-        // check for size! SysEx!!!
-        if (false)
+        // check for size! SysEx!!! mtu:203
+        if (inData == 0xF7)
         {
+            // as long as the msg is smaller then mtu, this should be enouth
+            mTxBuffer[mTxIndex++] = mTxBuffer[1];
+
             // should only happen from SysEx!
             // if we approach the end of the buffer, chop-up in segments until
             // we reach F7 (end of SysEx)
